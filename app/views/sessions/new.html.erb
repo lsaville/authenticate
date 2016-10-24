@@ -1,5 +1,7 @@
 <h1>Login</h1>
 
+<%= flash[:error] %>
+
 <%= form_tag("/login", method: "post") do %>
   <%= label_tag(:email, "email") %>
   <%= text_field_tag(:email) %>
@@ -9,3 +11,5 @@
 
   <%= submit_tag("Login") %>
 <% end %>
+
+<%= link_to "Register", new_user_path %>
