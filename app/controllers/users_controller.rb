@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [:show]
+
   def show
     @user = User.find(params[:id])
   end
@@ -22,5 +24,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:full_name, :email, :password)
+  end
+
+  def require_login
+    if session[:user_id] == nil
+      flash[:error] = "You must be logged in access"
+      redirect_to login_path
+    end
   end
 end
